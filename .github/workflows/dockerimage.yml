@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the server daemon image and run it
-      run: docker build . --file Dockerfile --tag softhsm-daemon +%s) && docker run -d --name hsm softhsm-daemon
+      run: docker build . --file Dockerfile --tag softhsm-daemon  && docker run -d --name hsm softhsm-daemon
     - name: Build the client image and run it
       run: docker build . --file Dockerfile.client --tag softhsm-client && docker run --rm --link=hsm:hsm softhsm-client pkcs11-tool --module=/usr/local/lib/libpkcs11-proxy.so -L
