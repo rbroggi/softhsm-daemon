@@ -1,4 +1,4 @@
-## Software HSM in Daemon (segregated hardware and possibly network)
+## Software HSM in segregated hardware (and possibly network) exposing PKCS#11 interface
 
 In this small repo the idea is to have two different containers:
 
