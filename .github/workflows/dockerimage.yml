@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the server daemon image
+      run: docker build . --file Dockerfile --tag softhsm-daemon:$(date +%s)
+    - name: Build the client image
+      run: docker build . --file Dockerfile.client --tag softhsm-client:$(date +%s)
+    - name: Starts server
+      run: docker run -d --name hsm softhsm-daemon
+    - name: Run client connecting to daemon
+      run: docker run --rm --link=hsm:hsm softhsm-client pkcs11-tool --module=/usr/local/lib/libpkcs11-proxy.so -L
