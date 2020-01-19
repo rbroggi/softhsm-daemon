@@ -16,27 +16,28 @@ The containers could probably be smaller and for a more mature solution a multi-
 
 ## Usage
 
-1. Clone the repo:
+1. Clone the repo and jump into the repo directory:
 ```bash
-
+git clone https://github.com/rbroggi/softhsm-daemon.git
+cd softhsm-daemon
 ```
-1. Build the daemon image:
+2. Build the daemon image:
 ```bash
 docker build -t softhsm-daemon .
 ```
-1. Build the client image:
+3. Build the client image:
 ```bash
 docker build -t softhsm-client -f Dockerfile.client .
 ```
-1. Run the daemon image in a container named 'hsm':
+4. Run the daemon image in a container named 'hsm':
 ```bash
 docker run -d --name hsm softhsm-daemon
 ```
-1. Run the client image (in interactive mode ) in a container linking to the daemon container:
+5. Run the client image (in interactive mode ) in a container linking to the daemon container:
 ```bash
 docker run --rm -it --link=hsm:hsm softhsm-client bash
 ```
-1. From within the client container list the slots in the daemon container:
+6. From within the client container list the slots in the daemon container:
 ```bash
 pkcs11-tool --module=/usr/local/lib/libpkcs11-proxy.so -L
 ```
